@@ -1,6 +1,9 @@
 import re
 import time as t
 import utils
+import os
+
+print(os.getcwd())
 
 u = utils.utils()
 
@@ -13,51 +16,59 @@ clear.writelines("")
 u.printf("Cleared files")
 t.sleep(0.5)
 clear.close()
-u.printf("Cleared:the file")
+u.printf("Cleared: the file")
 
 op = open("output.html", "a+")
 f = open("file.md", "r")
 lines = f.readlines()
 
-j= 1
-for i in range (len(lines)):
+inside_code_block = False  # Flag to track if we're inside a code block
+j = 1
+
+for i in range(len(lines)):
     try:
         if "```" in lines[i]:
-            i+=1
-            op.writelines(f"""<p style="background-color: lightgrey;">{lines[i]}</p>\n""")
-            
-    except:
-        u.printf("cant compare")
-        
-    lines[i] = lines[i].replace(' ','_')
-    if lines[i][0] == '#':
-        while True:
-            if lines[i][j] == '#':
-                j+=1
+            inside_code_block = not inside_code_block  # Toggle the flag
+            if inside_code_block:
+                i += 1
+                op.writelines(f"""<p style="background-color: lightgrey; padding: 10px; border-radius: 5px;"><code>{lines[i]}</code></p>\n""")
             else:
-                break
-        lines[i] = lines[i].replace('#', '')
-        k=0
-        lines[i] = lines[i].replace(' ','')
-        # lines[i] = lines[i].replace(' ','_')
-        if j == 1 or j == 2:
-            op.writelines(f"""<h{j}  style="text-align: center" id="{lines[i][1:-1]}">{lines[i][1:-1]}</h{j}>\n""")
+                i+=1
+                op.writelines(f"""<p>{lines[i]}</p>\n""")
+    
+        # Replace spaces with underscores
+        lines[i] = lines[i].replace(' ', '_')
+        
+        if lines[i][0] == '#':
+            while True:
+                if lines[i][j] == '#':
+                    j += 1
+                else:
+                    break
+            lines[i] = lines[i].replace('#', '')
+            lines[i] = lines[i].replace(' ', '')
+            if j == 1 or j == 2:
+                op.writelines(f"""<h{j} style="text-align: center" id="{lines[i][1:-1]}">{lines[i][1:-1]}</h{j}>\n""")
+            else:
+                op.writelines(f"""<h{j} style="text-align: left" id="{lines[i][1:-1]}">{lines[i][1:-1]}</h{j}>\n""")
+        elif lines[i][0] == '`':
+            lines[i] = lines[i].replace("`", "")
+            print()
         else:
-            op.writelines(f"""<h{j} style="text-align: left" id="{lines[i][1:-1]}">{lines[i][1:-1]}</h{j}>\n""")
-    elif lines[i][0] == '`':
-        lines[i].replace("`","")
-        print()
-    else:
-        try:
-            c = re.compile(r'\[(.*?)\]')
-            val = c.findall(lines[i])
-            if val[0] is not None:
-                # print(val)
-                op.writelines(f"""<a href="#{val[0]}"><h4>{val[0]}</h4></a>\n""")
-        except:
-            continue
-    # else:
-    #     op.writelines(f"<p>{lines[i]}</p>\n")
+            try:
+                c = re.compile(r'\[(.*?)\]')
+                val = c.findall(lines[i])
+                if val:
+                    op.writelines(f"""<a href="#{val[0]}"><h4>{val[0]}</h4></a>\n""")
+            except Exception as e:
+                u.printf(f"Error: {e}")
+    except Exception as e:
+        u.printf(f"Error processing line {i}: {e}")
+    op.writelines(f"""<p>{lines[i]}</p>""")
+# Debugging: Print all written lines to ensure correctness
+op.seek(0)
+for line in op:
+    print(line)
 
-for i in op:
-    print(i)
+op.close()
+f.close()
