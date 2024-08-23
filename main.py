@@ -28,14 +28,12 @@ for line in md:
             i +=1
         line = (line.replace("#",""))[1:-1]
         id = line.replace(" ", "_")
-        op.write(f"""<h{h} id="#{id}">{line}</h{h}>\n""")
+        op.write(f"""<h{h} style=" text-align: center;" id="#{id}">{line}</h{h}>\n\n""")
         
     # ++++++++++++++ Links ++++++++++++++++++++++
     if all(link in line for link in links):
         print(line)
-        # sb = line.index("[")
         for i in range (line.index("["), line.index("]")+1):
             text += line[i]
-        u.printh(text)
         under_ = text.replace(" ","_")
-        op.writelines(f"""<a href="#{under_[1:-1]}">{text[1:-1]}</a><br/>\n""")
+        op.writelines(f"""<h4  style="text-align: center;"><a href="#{under_[1:-1]}">{text[1:-1]}</a></h4>\n\n""")
