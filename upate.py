@@ -20,42 +20,44 @@ f = open("file.md", "r")
 lines = f.readlines()
 
 j= 1
-for i in range :
+for i in range (len(lines)):
     try:
-        bg = re.compile(r'\`(.*?)\`')
-        val = bg.findall(i)
-        if val: print(val)
+        if "```" in lines[i]:
+            i+=1
+            op.writelines(f"""<p style="background-color: lightgrey;">{lines[i]}</p>\n""")
+            
     except:
         u.printf("cant compare")
-    i = i.replace(' ','_')
-    if i[0] == '#':
+        
+    lines[i] = lines[i].replace(' ','_')
+    if lines[i][0] == '#':
         while True:
-            if i[j] == '#':
+            if lines[i][j] == '#':
                 j+=1
             else:
                 break
-        i = i.replace('#', '')
+        lines[i] = lines[i].replace('#', '')
         k=0
-        i = i.replace(' ','')
-        # i = i.replace(' ','_')
+        lines[i] = lines[i].replace(' ','')
+        # lines[i] = lines[i].replace(' ','_')
         if j == 1 or j == 2:
-            op.writelines(f"""<h{j}  style="text-align: center" id="{i[1:-1]}">{i[1:-1]}</h{j}>\n""")
+            op.writelines(f"""<h{j}  style="text-align: center" id="{lines[i][1:-1]}">{lines[i][1:-1]}</h{j}>\n""")
         else:
-            op.writelines(f"""<h{j} style="text-align: left" id="{i[1:-1]}">{i[1:-1]}</h{j}>\n""")
-    elif i[0] == '`':
-        i.replace("`","")
+            op.writelines(f"""<h{j} style="text-align: left" id="{lines[i][1:-1]}">{lines[i][1:-1]}</h{j}>\n""")
+    elif lines[i][0] == '`':
+        lines[i].replace("`","")
         print()
     else:
         try:
             c = re.compile(r'\[(.*?)\]')
-            val = c.findall(i)
+            val = c.findall(lines[i])
             if val[0] is not None:
                 # print(val)
                 op.writelines(f"""<a href="#{val[0]}"><h4>{val[0]}</h4></a>\n""")
         except:
             continue
     # else:
-    #     op.writelines(f"<p>{i}</p>\n")
+    #     op.writelines(f"<p>{lines[i]}</p>\n")
 
 for i in op:
     print(i)
