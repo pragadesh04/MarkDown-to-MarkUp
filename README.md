@@ -35,7 +35,7 @@ To get started with **MarkDown-to-MarkUp**, follow these steps:
    ```
 
 ## install-exe
-[Download The Exe file](https://github.com/pragadesh04/MarkDown-to-MarkUp/blob/main/MarkUp-Master.zip)
+[Download The Exe file](https://github.com/pragadesh04/MarkDown-to-MarkUp/raw/main/MarkUp-Master.zip)
 
 ## Usage
 
