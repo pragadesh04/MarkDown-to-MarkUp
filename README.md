@@ -1,6 +1,6 @@
 # MarkDown-to-MarkUp
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg) 
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg) 
 
 ## Overview
 
@@ -35,7 +35,7 @@ To get started with **MarkDown-to-MarkUp**, follow these steps:
    ```
 
 ## install-exe
-<a href="./MarkUp-Master">Download</a>
+<a href="./MarkUp-Master.zip">Download</a>
 
 ## Usage
 
