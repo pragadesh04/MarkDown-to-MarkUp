@@ -1,13 +1,10 @@
-Sure! Here’s a simplified `README.md` file for your **MarkDown-to-MarkUp** project without any images:
-
-```markdown
 # MarkDown-to-MarkUp
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg) 
 
 ## Overview
 
-**MarkDown-to-MarkUp** is a Python-based tool designed to convert Markdown files into various markup formats effortlessly. Whether you're a developer, writer, or content creator, this project simplifies the process of transforming your Markdown content into HTML, LaTeX, and more!
+**MarkDown-to-MarkUp** is a Python-based tool designed to convert Markdown files into various markup formats effortlessly. Whether you're a developer, writer, or content creator, this project simplifies the process of transforming your Markdown content into HTML
 
 ## Features
 
